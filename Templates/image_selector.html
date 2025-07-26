@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Select an Image</title>
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Quicksand', sans-serif;
+      background: linear-gradient(135deg, #fff5f5, #ffffff);
+      padding: 40px;
+      text-align: center;
+    }
+    h2 {
+      margin-bottom: 30px;
+      color: #333;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+      max-width: 1000px;
+      margin: auto;
+    }
+    form {
+      display: inline;
+    }
+    .image-card {
+      background: white;
+      padding: 10px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+    img {
+      width: 100%;
+      border-radius: 8px;
+      height: 200px;
+      object-fit: cover;
+    }
+    button {
+      margin-top: 10px;
+      padding: 8px 16px;
+      background-color: #f8b500;
+      color: white;
+      border: none;
+      border-radius: 20px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #e6a200;
+    }
+  </style>
+</head>
+<body>
+  <h2>Select the Best Matching Image</h2>
+  <div class="grid">
+    {% for image in images %}
+      <div class="image-card">
+        <form method="POST" action="{{ url_for('select_image') }}">
+          <input type="hidden" name="selected_image" value="{{ image }}">
+          <img src="{{ image }}" alt="Food Image">
+          <button type="submit">Select</button>
+        </form>
+      </div>
+    {% endfor %}
+  </div>
+</body>
+</html>
